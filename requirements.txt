@@ -1,0 +1,5 @@
+six==1.16.0
+rich==12.6.0
+rich_argparse==1.0.0
+grpclib[protobuf]==0.4.3
+protobuf==4.22.0

@@ -6,7 +6,7 @@
 
 # 🏄‍♂️ Description
 
-ProtoDeep is an easy to use tool that allows you to reverse protobuf encoded data.
+ProtoDeep is an easy to use tool that allows you to decode and analyze protobuf data.
 
 It is **heavily based** on the well-established [Blackbox Protobuf](https://github.com/nccgroup/blackboxprotobuf) package, and inspired by [Protobuf Inspector](https://github.com/mildsunrise/protobuf-inspector) for the custom definitions feature.\
 This project was originally intended to be integrated into the [GHunt RDTK](https://github.com/mxrch/ghunt-rdtk), but the script grew a lot and ended up becoming a tool that can help many people.

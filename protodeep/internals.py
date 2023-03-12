@@ -38,6 +38,8 @@ def clean_schema(schema, parsed, definitions={}) -> tuple[dict[str], bool]:
             elif sub.get("name"):
                 sub["name"] = ""
 
+            if "alt_typedefs" in sub:
+                del(sub["alt_typedefs"])
             if "example_value_ignored" in sub:
                 sub["value"] = sub.pop("example_value_ignored")
             if "field_order" in sub:

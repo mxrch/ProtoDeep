@@ -105,4 +105,4 @@ def main(data: bytes=b"",
         protodeep_schema.export_protodeep(export_protodeep)
         
     if compile:
-        protodeep_schema.compile_python(compile, export_protobuf)
+        protodeep_schema.compile_python(compile, export_protobuf, schema_name)

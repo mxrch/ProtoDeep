@@ -25,7 +25,7 @@ class ProtoDeepSchema():
             }, f)
         print(f"[+] Protodeep file {filename} created !")
 
-    def compile_python(self, filename: str, export_protobuf: str):
+    def compile_python(self, filename: str, export_protobuf: str, name: str="Schema"):
         from grpc_tools import protoc
 
         import uuid
@@ -38,7 +38,7 @@ class ProtoDeepSchema():
             filename = f"{export_protobuf.split('.')[:1][0]}_pb2.py"
         
         if not export_protobuf:
-            self.export_protofile(random_name)
+            self.export_protofile(random_name, name)
         else:
             import shutil
             shutil.copy(export_protobuf, random_name)
@@ -173,6 +173,7 @@ def guess_schema(data: bytes, definitions: dict={}, bruteforce_index=20, no_auto
         schema = decode_message(data[data_index:], new_schema)
         parsed = schema[0]
         new_schema = schema[1]
+        new_schema, _ = clean_schema(new_schema, parsed, definitions=definitions)
 
     protodeep_schema = ProtoDeepSchema(schema=new_schema, values=parsed)
     return protodeep_schema

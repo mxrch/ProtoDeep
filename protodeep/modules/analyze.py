@@ -24,7 +24,8 @@ def main(data: bytes=b"",
         compile: str="",
         stdin: bool=False,
         base64_input: bool=False,
-        schema_name: str="Schema"
+        schema_name: str="Schema",
+        hex_input: bool=False
         ):
     
     # Args parsing
@@ -37,7 +38,7 @@ def main(data: bytes=b"",
             data = f.read()
     elif stdin:
         import sys, platform
-        if platform.system() == "Windows":
+        if platform.system() == "Windows" and not base64_input and not hex_input:
             exit("[-] Piping bytes in terminal is fucked in Windows, please import your data from a file, or use Linux for this.")
         data = sys.stdin.buffer.read()
     else:
@@ -46,6 +47,9 @@ def main(data: bytes=b"",
     if base64_input:
         import base64
         data = base64.b64decode(data)
+
+    if hex_input:
+        data = bytes.fromhex(data.decode('ascii'))
 
     if defs_file:
         defs_path = Path(defs_file)

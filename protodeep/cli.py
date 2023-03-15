@@ -18,6 +18,7 @@ def parse_and_run():
     parser.add_argument('-na', '--no-autodetect', action='store_true', default=False, help="Don't try to autodetect if it's a raw HTTP request.")
     parser.add_argument('-s', '--stdin', action='store_true', default=False, help="Parse from stdin.")
     parser.add_argument('-b', '--base64', action='store_true', default=False, help="If this is a base64 input, so it automatically decodes it.")
+    parser.add_argument('-hx', '--hex', action='store_true', default=False, help="If this is a hex input, so it automatically decodes it.")
     parser.add_argument('-bi', '--bruteforce-index', type=int, default=20, help="The index up to which to try bruteforce to find Protobuf content. Default : 20", metavar="NUMBER")
     parser.add_argument('-he', '--hide-empty', action='store_true', default=False, help="Hide the empty values.")
     parser.add_argument('-np', '--no-print', action='store_true', default=False, help="Don't print the decoded protobuf.")
@@ -54,6 +55,7 @@ def process_args(args: argparse.Namespace):
         stdin=args.stdin,
         no_autodetect=args.no_autodetect,
         base64_input=args.base64,
+        hex_input=args.hex,
         data_type=args.type,
         compile=args.compile,
         no_print=args.no_print,

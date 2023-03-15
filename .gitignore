@@ -6,3 +6,4 @@ protodeep.egg-info/
 *.json
 *.proto
 *.pdeep
+.venv

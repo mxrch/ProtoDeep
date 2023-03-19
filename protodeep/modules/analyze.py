@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 
 from protodeep.lib import guess_schema
+from protodeep.errors import ProtoDeepCannotDecode
 
 
 def main(data: bytes=b"",
@@ -72,7 +73,7 @@ def main(data: bytes=b"",
                     bruteforce_index=bruteforce_index,
                     no_autodetect=no_autodetect
                 )
-            except:
+            except ProtoDeepCannotDecode:
                 exit("[-] Can't decode the data. Please verify your type and bruteforce_index. Otherwise, RIP. 🥹")
         case "protodeep":
             import pickle

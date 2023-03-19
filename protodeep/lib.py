@@ -5,6 +5,7 @@ from rich.console import Console
 from protodeep.blackboxprotobuf import decode_message, export_protofile
 from protodeep.utils import strip_markups
 from protodeep.internals import find_proto_schema, clean_schema
+from protodeep.errors import ProtoDeepCannotDecode
 
 
 class ProtoDeepSchema():
@@ -159,21 +160,24 @@ class ProtoDeepSchema():
         _pretty_print(self.schema, self.values)
 
 def guess_schema(data: bytes, definitions: dict={}, bruteforce_index=20, no_autodetect=False) -> ProtoDeepSchema:
-    if not no_autodetect:
-        if data.strip().startswith(b"HTTP") and b"\r\n\r\n" in data:
-            print("[!] Full request detected, extracting the body...")
-            data = data.split(b"\r\n\r\n", 1)[1]
+    try:
+        if not no_autodetect:
+            if data.strip().startswith(b"HTTP") and b"\r\n\r\n" in data:
+                print("[!] Full request detected, extracting the body...")
+                data = data.split(b"\r\n\r\n", 1)[1]
 
-    schema, data_index = find_proto_schema(data, bruteforce_index)
-    parsed = schema[0]
-    new_schema = schema[1]
-
-    new_schema, custom_types_defined = clean_schema(new_schema, parsed, definitions=definitions)
-    if custom_types_defined:
-        schema = decode_message(data[data_index:], new_schema)
+        schema, data_index = find_proto_schema(data, bruteforce_index)
         parsed = schema[0]
         new_schema = schema[1]
-        new_schema, _ = clean_schema(new_schema, parsed, definitions=definitions)
 
-    protodeep_schema = ProtoDeepSchema(schema=new_schema, values=parsed)
-    return protodeep_schema
+        new_schema, custom_types_defined = clean_schema(new_schema, parsed, definitions=definitions)
+        if custom_types_defined:
+            schema = decode_message(data[data_index:], new_schema)
+            parsed = schema[0]
+            new_schema = schema[1]
+            new_schema, _ = clean_schema(new_schema, parsed, definitions=definitions)
+
+        protodeep_schema = ProtoDeepSchema(schema=new_schema, values=parsed)
+        return protodeep_schema
+    except Exception:
+        raise ProtoDeepCannotDecode

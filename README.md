@@ -133,6 +133,8 @@ $ pip3 install -r requirements-dev.txt
 $ pytest
 ```
 
+*Tests are run automatically through [GitHub Actions](https://github.com/mxrch/ProtoDeep/actions).*
+
 # 📕 Cheatsheet
 
 *Some examples so you know how to use protodeep :*

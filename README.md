@@ -124,6 +124,15 @@ protodeep_schema.pretty_print(hide_empty=True, filter_any=["*term_to_filter*"])
 protodeep_schema.export_protodeep("obj.pdeep")
 ```
 
+## Testing
+
+Thanks to @learn-more, tests are now available, to test the CLI and lib usage !\
+You can launch the tests by doing :
+```bash
+$ pip3 install -r requirements-dev.txt
+$ pytest
+```
+
 # 📕 Cheatsheet
 
 *Some examples so you know how to use protodeep :*

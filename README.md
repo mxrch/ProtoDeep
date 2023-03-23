@@ -126,7 +126,7 @@ protodeep_schema.export_protodeep("obj.pdeep")
 
 ## Testing
 
-Thanks to @learn-more, tests are now available, to test the CLI and lib usage !\
+Thanks to [learn-more](https://github.com/learn-more), tests are now available, to test the CLI and lib usage !\
 You can launch the tests by doing :
 ```bash
 $ pip3 install -r requirements-dev.txt

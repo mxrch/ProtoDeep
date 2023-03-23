@@ -153,7 +153,7 @@ $ protodeep protobuf_data.bin -t protobuf -d search_ps_defs.json -np -epf -epd -
 
 Read protobuf from stdin, provide a custom definitions file, match the keychain "11,1,1,2", hide the empty values, and filter lines where the word "access" and "denied" are present, and lines where the word "tiktok" is present:
 ```bash
-$ protodeep --stdin -t protobuf -mk "11,1,1,2" -he -f "*access*denied*" -f "*tiktok*"
+$ curl -s <protobuf_endpoint> | protodeep --stdin -t protobuf -mk "11,1,1,2" -he -f "*access*denied*" -f "*tiktok*"
 ```
 
 *Matching / filtering arguments can be used as many times as you like.*

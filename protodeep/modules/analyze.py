@@ -74,8 +74,9 @@ def main(data: bytes=b"",
                     no_autodetect=no_autodetect,
                     named_keychains=named_keychains
                 )
-            except:
-                exit("[-] Can't decode the data. Please verify your type and bruteforce_index. Otherwise, RIP. 🥹")
+            except Exception as err:
+                print("Error :", err)
+                exit("\n[-] Can't decode the data. Please verify your type and bruteforce_index. Otherwise, RIP. 🥹")
         case "protodeep":
             import pickle
             from protodeep.lib import ProtoDeepSchema, clean_schema

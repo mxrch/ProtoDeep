@@ -7,3 +7,4 @@ protodeep.egg-info/
 *.proto
 *.pdeep
 .venv
+*_pb2.py

@@ -51,8 +51,6 @@ def clean_schema(schema, parsed, definitions={}, named_keychains=False) -> tuple
                         if isinstance(sparsed, list):
                             sub["seen_repeated"] = True # Repeated sub
                         sub["message_typedef"] = _clean_schema(sub["message_typedef"], sparsed, new_key_chain, defs, named_keychains)
-                        if skey in sparsed and named_keychains:
-                            del(parsed[key])
                 elif isinstance(parsed, list):
                     for item in parsed:
                         if skey in item:
@@ -61,11 +59,11 @@ def clean_schema(schema, parsed, definitions={}, named_keychains=False) -> tuple
                                 sub["seen_repeated"] = True # Repeated sub
                             sub["message_typedef"] = _clean_schema(sub["message_typedef"], sparsed, new_key_chain, defs, named_keychains)
 
-            if named_keychains and "message_typedef" not in sub and not sub.get("name"):
+            if named_keychains and not sub.get("message_typedef") and not sub.get("name"):
                 del(message[key])
             else:
                 message[key] = sub
         return message
     
-    _clean_schema(schema, parsed, defs=definitions, named_keychains=named_keychains)
+    schema = _clean_schema(schema, parsed, defs=definitions, named_keychains=named_keychains)
     return schema, custom_types_defined

@@ -16,12 +16,12 @@ def find_proto_schema(body: bytes, bruteforce_index: int=20):
             pass
     return output, i
 
-def clean_schema(schema, parsed, definitions={}) -> tuple[dict[str], bool]:
+def clean_schema(schema, parsed, definitions={}, named_keychains=False) -> tuple[dict[str], bool]:
     global custom_types_defined
     
     custom_types_defined = False
 
-    def _clean_schema(message: dict, parsed: dict, key_chain: str="", defs: dict={}):
+    def _clean_schema(message: dict, parsed: dict, key_chain: str="", defs: dict={}, named_keychains=False):
         global custom_types_defined
 
         original_message = deepcopy(message)
@@ -50,16 +50,22 @@ def clean_schema(schema, parsed, definitions={}) -> tuple[dict[str], bool]:
                         sparsed = parsed[skey]
                         if isinstance(sparsed, list):
                             sub["seen_repeated"] = True # Repeated sub
-                        sub["message_typedef"] = _clean_schema(sub["message_typedef"], sparsed, new_key_chain, defs)
+                        sub["message_typedef"] = _clean_schema(sub["message_typedef"], sparsed, new_key_chain, defs, named_keychains)
+                        if skey in sparsed and named_keychains:
+                            del(parsed[key])
                 elif isinstance(parsed, list):
                     for item in parsed:
                         if skey in item:
                             sparsed = item[skey]
                             if isinstance(sparsed, list):
                                 sub["seen_repeated"] = True # Repeated sub
-                            sub["message_typedef"] = _clean_schema(sub["message_typedef"], sparsed, new_key_chain, defs)
-            message[key] = sub
+                            sub["message_typedef"] = _clean_schema(sub["message_typedef"], sparsed, new_key_chain, defs, named_keychains)
+
+            if named_keychains and "message_typedef" not in sub and not sub.get("name"):
+                del(message[key])
+            else:
+                message[key] = sub
         return message
     
-    _clean_schema(schema, parsed, defs=definitions)
+    _clean_schema(schema, parsed, defs=definitions, named_keychains=named_keychains)
     return schema, custom_types_defined

@@ -16,6 +16,7 @@ def parse_and_run():
     parser.add_argument('-t', '--type', required=True, type=str, help="Either protobuf (raw protobuf content), or protodeep (a ProtoDeep file).")
     parser.add_argument('-d', '--definitions', type=str, help="The file containing the custom protobuf definitions.")
     parser.add_argument('-na', '--no-autodetect', action='store_true', default=False, help="Don't try to autodetect if it's a raw HTTP request.")
+    parser.add_argument('-nk', '--named-keychains', action='store_true', default=False, help="Show and extract only named keychains.")
     parser.add_argument('-s', '--stdin', action='store_true', default=False, help="Parse from stdin.")
     parser.add_argument('-b', '--base64', action='store_true', default=False, help="If this is a base64 input, so it automatically decodes it.")
     parser.add_argument('-hx', '--hex', action='store_true', default=False, help="If this is a hex input, so it automatically decodes it.")
@@ -59,5 +60,6 @@ def process_args(args: argparse.Namespace):
         data_type=args.type,
         compile=args.compile,
         no_print=args.no_print,
-        schema_name=args.name
+        schema_name=args.name,
+        named_keychains=args.named_keychains
     )

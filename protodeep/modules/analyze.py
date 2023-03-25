@@ -12,6 +12,7 @@ def main(data: bytes=b"",
         no_print: bool=False,
         data_type: str="",
         no_autodetect: bool=False,
+        named_keychains: bool=False,
         bruteforce_index: int=10,
         match_any: str="",
         match_keychain: str="",
@@ -70,10 +71,12 @@ def main(data: bytes=b"",
                     data=data,
                     definitions=definitions,
                     bruteforce_index=bruteforce_index,
-                    no_autodetect=no_autodetect
+                    no_autodetect=no_autodetect,
+                    named_keychains=named_keychains
                 )
-            except:
-                exit("[-] Can't decode the data. Please verify your type and bruteforce_index. Otherwise, RIP. 🥹")
+            except Exception as err:
+                print("Error :", err)
+                exit("\n[-] Can't decode the data. Please verify your type and bruteforce_index. Otherwise, RIP. 🥹")
         case "protodeep":
             import pickle
             from protodeep.lib import ProtoDeepSchema, clean_schema

@@ -158,7 +158,7 @@ class ProtoDeepSchema():
         cs = Console(highlight=False)
         _pretty_print(self.schema, self.values)
 
-def guess_schema(data: bytes, definitions: dict={}, bruteforce_index=20, no_autodetect=False) -> ProtoDeepSchema:
+def guess_schema(data: bytes, definitions: dict={}, bruteforce_index=20, no_autodetect=False, named_keychains=False) -> ProtoDeepSchema:
     if not no_autodetect:
         if data.strip().startswith(b"HTTP") and b"\r\n\r\n" in data:
             print("[!] Full request detected, extracting the body...")
@@ -168,12 +168,12 @@ def guess_schema(data: bytes, definitions: dict={}, bruteforce_index=20, no_auto
     parsed = schema[0]
     new_schema = schema[1]
 
-    new_schema, custom_types_defined = clean_schema(new_schema, parsed, definitions=definitions)
+    new_schema, custom_types_defined = clean_schema(new_schema, parsed, definitions=definitions, named_keychains=named_keychains)
     if custom_types_defined:
         schema = decode_message(data[data_index:], new_schema)
         parsed = schema[0]
         new_schema = schema[1]
-        new_schema, _ = clean_schema(new_schema, parsed, definitions=definitions)
+        new_schema, _ = clean_schema(new_schema, parsed, definitions=definitions, named_keychains=named_keychains)
 
     protodeep_schema = ProtoDeepSchema(schema=new_schema, values=parsed)
     return protodeep_schema

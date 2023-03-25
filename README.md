@@ -42,8 +42,8 @@ It will automatically use venvs to avoid dependency conflicts with other project
 ## Help menu
 
 ```
-Usage: main.py [-h] -t TYPE [-d DEFINITIONS] [-na] [-s] [-b] [-bi NUMBER] [-he] [-np] [-m MASK] [-mk MASK] [-mv MASK]
-               [-f MASK] [-fk MASK] [-fv MASK] [-epf [PROTOFILE_FILENAME]] [-epd [PROTODEEP_FILENAME]]
+Usage: main.py [-h] -t TYPE [-d DEFINITIONS] [-na] [-nk] [-s] [-b] [-hx] [-bi NUMBER] [-he] [-np] [-m MASK] [-mk MASK]
+               [-mv MASK] [-f MASK] [-fk MASK] [-fv MASK] [-epf [PROTOFILE_FILENAME]] [-epd [PROTODEEP_FILENAME]]
                [-c [PYTHON_FILENAME]] [-n SCHEMA_NAME]
                [proto_file]
 
@@ -56,8 +56,11 @@ Options:
   -d, --definitions DEFINITIONS
                         The file containing the custom protobuf definitions.
   -na, --no-autodetect  Don't try to autodetect if it's a raw HTTP request.
+  -nk, --named-keychains
+                        Show and extract only named keychains.
   -s, --stdin           Parse from stdin.
   -b, --base64          If this is a base64 input, so it automatically decodes it.
+  -hx, --hex            If this is a hex input, so it automatically decodes it.
   -bi, --bruteforce-index NUMBER
                         The index up to which to try bruteforce to find Protobuf content. Default : 20
   -he, --hide-empty     Hide the empty values.

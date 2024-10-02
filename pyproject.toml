@@ -22,3 +22,26 @@ protodeep = "protodeep.protodeep:main"
 
 [tool.setuptools.packages.find]
 include = ["protodeep", "protodeep.*"]
+[tool.poetry]
+name = "protodeep"
+version = "1.1.0"
+description = "A tool to help reversing protobuf."
+authors = ["mxrch <mxrch.dev@pm.me>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+six = "^1.16.0"
+rich = "^13.9.1"
+rich-argparse = "^1.5.2"
+grpcio-tools = "^1.66.2"
+protobuf = "^5.28.2"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

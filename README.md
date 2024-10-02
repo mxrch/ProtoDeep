@@ -1,5 +1,7 @@
 ![](assets/long_banner.png)
 
+#### 🐍 Now Python 3.13 compatible !
+
 <br>
 
 ![Python minimum version](https://img.shields.io/badge/Python-3.10%2B-brightgreen)

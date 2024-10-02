@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python 3.13
       uses: actions/setup-python@v4.5.0
       with:
-        python-version: '3.13'
+        python-version: '3.13.0rc1'
 
     - name: Install poetry
       uses: abatilo/actions-poetry@v2

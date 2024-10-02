@@ -1,6 +1,6 @@
 [project]
 name = "protodeep"
-version = "1.1.1"
+version = "1.1.2"
 authors = [
     {name = "mxrch", email = "mxrch.dev@pm.me"},
 ]
@@ -17,14 +17,14 @@ dynamic = ["dependencies"]
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
 
-[project.scripts]
+[tool.poetry.scripts]
 protodeep = "protodeep.protodeep:main"
 
 [tool.setuptools.packages.find]
 include = ["protodeep", "protodeep.*"]
 [tool.poetry]
 name = "protodeep"
-version = "1.1.1"
+version = "1.1.2"
 description = "A tool to help reversing protobuf."
 authors = ["mxrch <mxrch.dev@pm.me>"]
 license = "MIT"
